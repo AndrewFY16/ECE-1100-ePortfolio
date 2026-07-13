@@ -87,8 +87,6 @@
 
   /* ===== HERO ===== */
   .hero{padding-top:70px; padding-bottom:60px; border-top:none;}
-  .hero-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:center;}
-  @media (max-width:860px){.hero-grid{grid-template-columns:1fr;}}
   .hero h1{font-size:clamp(2.1rem, 5vw, 3.1rem); margin-bottom:14px;}
   .hero h1 .role{display:block; font-size:0.5em; color:var(--teal); margin-top:10px; letter-spacing:0.06em;}
   .hero p.lead{margin-top:16px; margin-bottom:26px;}
@@ -103,16 +101,17 @@
   .btn-ghost{color:var(--text); background:transparent;}
   .btn-ghost:hover{border-color:var(--teal); color:var(--teal); transform:translateY(-2px);}
 
-  .schematic-frame{border:1px solid var(--border); border-radius:6px; background:var(--panel); padding:18px;}
-  .schematic-frame svg{width:100%; height:auto; display:block;}
-  .frame-label{font-family:var(--font-mono); font-size:0.7rem; color:var(--text-dim); letter-spacing:0.08em; margin-top:10px; text-align:center;}
-
   /* ===== TRACE RAIL (signature decorative motif) ===== */
   .trace-rail{position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(var(--teal), transparent 90%); opacity:0.35; display:none;}
   @media (min-width:1180px){ .trace-rail{display:block; left:calc(50% - 560px);} }
 
   /* ===== ABOUT ===== */
   .about-grid{display:grid; grid-template-columns:1fr; gap:18px;}
+  .about-photo{
+    width:200px; border-radius:8px; overflow:hidden; border:1px solid var(--border);
+    background:var(--panel); margin-bottom:6px;
+  }
+  .about-photo img{width:100%; height:auto; display:block;}
   .pull{
     font-family:var(--font-display); font-size:1.15rem; color:var(--amber);
     border-left:3px solid var(--amber); padding-left:16px; margin:20px 0;
@@ -143,8 +142,20 @@
   .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 4px;}
   .tag{font-family:var(--font-mono); font-size:0.72rem; color:var(--teal); border:1px solid var(--teal); border-radius:20px; padding:3px 11px; letter-spacing:0.03em;}
   .status{font-family:var(--font-mono); font-size:0.72rem; text-transform:uppercase; color:var(--amber); border:1px solid var(--amber); border-radius:20px; padding:3px 11px;}
-  .project-visual{margin-top:18px; border:1px dashed var(--border); border-radius:6px; padding:16px; background:var(--bg-deep);}
-  .project-visual svg{width:100%; height:auto; display:block;}
+  .video-embed{
+    position:relative; width:100%; padding-top:56.25%; margin-top:20px;
+    border-radius:6px; overflow:hidden; border:1px solid var(--border); background:var(--bg-deep);
+  }
+  .video-embed iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:0;}
+  .hardware-photo{
+    max-width:380px; margin:20px 0; border:1px solid var(--border); border-radius:8px;
+    overflow:hidden; background:var(--panel);
+  }
+  .hardware-photo img{width:100%; height:auto; display:block;}
+  .hardware-caption{
+    font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);
+    padding:10px 14px; border-top:1px solid var(--grid-line);
+  }
   ul.feature-list{margin:14px 0 0 0; padding-left:1.1em; color:var(--text-dim);}
   ul.feature-list li{margin-bottom:6px;}
 
@@ -211,51 +222,12 @@
 
 <!-- ===================== HERO / WELCOME ===================== -->
 <section class="hero wrap" id="top">
-  <div class="hero-grid">
-    <div>
-      <div class="eyebrow">Welcome</div>
-      <h1>Andrew Yang<span class="role">Electrical &amp; Computer Engineering, Georgia Tech</span></h1>
-      <p class="lead">I'm a first-year ECE student at Georgia Tech building toward a career in aerospace and clean-energy engineering. Right now that means circuits, embedded systems, and a VIP research team studying how to harvest energy from vibration — with NASA and SpaceX as the long-range targets. This site tracks that build, from coursework to code to what's next.</p>
-      <div class="cta-row">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#resume" class="btn btn-ghost">Download Resume</a>
-      </div>
-    </div>
-    <div class="schematic-frame">
-      <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic diagram showing a signal path from input labeled Freshman EE Student to output labeled Aerospace and Energy Engineer, passing through nodes for coursework, VIP research, and embedded projects.">
-        <defs>
-          <marker id="dot" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="2.6" fill="#5eead4"/></marker>
-        </defs>
-        <line x1="20" y1="130" x2="460" y2="130" stroke="#5eead4" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.6"/>
-        <circle cx="20" cy="130" r="4" fill="#ffb454"/>
-        <text x="20" y="110" fill="#eef2f6" font-family="IBM Plex Mono, monospace" font-size="11">V_IN</text>
-        <text x="4" y="152" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">Freshman EE</text>
-
-        <rect x="90" y="112" width="60" height="36" rx="4" fill="none" stroke="#eef2f6" stroke-width="1.2"/>
-        <text x="96" y="105" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">Circuits &amp;</text>
-        <text x="96" y="163" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">Systems</text>
-        <circle cx="90" cy="130" r="3" fill="#5eead4"/>
-        <circle cx="150" cy="130" r="3" fill="#5eead4"/>
-
-        <rect x="200" y="112" width="70" height="36" rx="4" fill="none" stroke="#eef2f6" stroke-width="1.2"/>
-        <text x="203" y="105" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">VIP M.A.R.S.</text>
-        <text x="212" y="163" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">Research</text>
-        <circle cx="200" cy="130" r="3" fill="#5eead4"/>
-        <circle cx="270" cy="130" r="3" fill="#5eead4"/>
-
-        <rect x="320" y="112" width="80" height="36" rx="4" fill="none" stroke="#eef2f6" stroke-width="1.2"/>
-        <text x="323" y="105" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">Embedded</text>
-        <text x="323" y="163" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">Projects</text>
-        <circle cx="320" cy="130" r="3" fill="#5eead4"/>
-        <circle cx="400" cy="130" r="3" fill="#5eead4"/>
-
-        <circle cx="460" cy="130" r="4" fill="#ffb454"/>
-        <text x="410" y="110" fill="#eef2f6" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="end">V_OUT</text>
-        <text x="460" y="152" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9" text-anchor="end">Aerospace / Energy</text>
-        <text x="460" y="164" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9" text-anchor="end">Engineer</text>
-      </svg>
-      <div class="frame-label">FIG. 1 — SIGNAL PATH, PRESENT TO GOAL</div>
-    </div>
+  <div class="eyebrow">Welcome</div>
+  <h1>Andrew Yang<span class="role">Electrical &amp; Computer Engineering, Georgia Tech</span></h1>
+  <p class="lead">I'm a first-year ECE student at Georgia Tech building toward a career in aerospace and clean-energy engineering. Right now that means circuits, embedded systems, and a VIP research team studying how to harvest energy from vibration — with NASA and SpaceX as the long-range targets. This site tracks that build, from coursework to code to what's next.</p>
+  <div class="cta-row">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#resume" class="btn btn-ghost">Download Resume</a>
   </div>
 </section>
 
@@ -264,6 +236,9 @@
   <div class="eyebrow">About Me</div>
   <h2>Who I am</h2>
   <div class="about-grid">
+    <div class="about-photo">
+      <img src="andrew-photo.jpg" alt="Andrew Yang">
+    </div>
     <p class="lead">I'm an Electrical Engineering student at Georgia Tech with hands-on experience in circuit analysis, digital systems design, and low-level programming in C and RISC-V assembly. I'm passionate about energy systems and hardware-software integration, with a research interest in renewable energy technologies for space applications.</p>
 
     <p>My focus areas are embedded systems, aerospace, and clean energy. That interest is what led me to Georgia Tech's VIP (Vertically Integrated Projects) program, where I work with the M.A.R.S. team on a NASA Kennedy Space Center / JPL research partnership investigating piezoelectric and triboelectric energy harvesting — converting mechanical vibration and motion into usable electrical energy for low-power aerospace applications.</p>
@@ -393,6 +368,11 @@
     </div>
     <p>For my ECE 1100 Individual Discovery Project, I'm building a heart rate monitor that reads and reports a person's pulse in real time. A pulse sensor detects the small changes in blood volume that occur with each heartbeat, and an Arduino Nano processes that analog signal and calculates beats per minute (BPM) — displayed either on the serial monitor or on an LED screen. I've never worked with an Arduino before, so this project doubles as my introduction to microcontroller programming and analog signal acquisition, alongside the breadboard and hardware-wiring skills that go with it.</p>
 
+    <div class="hardware-photo">
+      <img src="arduino-nano.png" alt="Arduino Nano microcontroller board">
+      <div class="hardware-caption">Arduino Nano — the microcontroller at the core of the build</div>
+    </div>
+
     <p>The build is organized around a six-week timeline. I start by getting the pulse sensor talking to the Arduino IDE and confirming I can read a raw analog signal on the Serial Monitor, then move to visualizing that signal on the Serial Plotter to understand what an actual pulse waveform looks like coming off the sensor. From there, the core technical challenge is peak/threshold detection — picking individual heartbeats out of a noisy analog signal and displaying each detected beat on the LED screen. Once beat detection is reliable, I calculate BPM from the time between detected beats and calibrate the readings against manual pulse counting, then add smoothing and averaging so the displayed number doesn't jump around between beats. The final week is reserved as buffer time for testing plus preparing the writeup and demo.</p>
 
     <p>The designed outcome is a sensor that consistently and accurately measures BPM for whoever is holding it — simple in concept, but it touches a lot of fundamentals at once: analog-to-digital signal acquisition, noise filtering, real-time processing on constrained hardware, and turning a raw sensor reading into something a person can actually read and trust. I'm using Arduino's own project hub as my main reference as I work through the build.</p>
@@ -405,33 +385,6 @@
       <li>BPM calculation calibrated against manual pulse counting</li>
       <li>Planned: signal smoothing/averaging for stable, readable output on LED display</li>
     </ul>
-
-    <div class="project-visual">
-      <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Signal chain diagram showing a pulse sensor connected to an Arduino Nano, which processes the heartbeat waveform and outputs beats per minute to an LED display.">
-        <!-- pulse sensor -->
-        <rect x="20" y="80" width="90" height="46" rx="4" fill="none" stroke="#eef2f6" stroke-width="1.4"/>
-        <text x="65" y="108" text-anchor="middle" fill="#eef2f6" font-family="IBM Plex Mono, monospace" font-size="10">PULSE</text>
-        <text x="65" y="120" text-anchor="middle" fill="#eef2f6" font-family="IBM Plex Mono, monospace" font-size="10">SENSOR</text>
-
-        <!-- waveform between sensor and arduino -->
-        <polyline points="110,103 130,103 138,80 146,124 154,90 162,103 240,103" fill="none" stroke="#5eead4" stroke-width="1.6"/>
-
-        <!-- arduino -->
-        <rect x="250" y="70" width="110" height="66" rx="4" fill="none" stroke="#ffb454" stroke-width="1.6"/>
-        <text x="305" y="98" text-anchor="middle" fill="#ffb454" font-family="IBM Plex Mono, monospace" font-size="10.5">ARDUINO</text>
-        <text x="305" y="114" text-anchor="middle" fill="#ffb454" font-family="IBM Plex Mono, monospace" font-size="10.5">NANO</text>
-        <text x="305" y="128" text-anchor="middle" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="8.5">peak detect · BPM calc</text>
-
-        <line x1="360" y1="103" x2="410" y2="103" stroke="#5eead4" stroke-width="1.6"/>
-
-        <!-- LED display -->
-        <rect x="420" y="80" width="100" height="46" rx="4" fill="none" stroke="#eef2f6" stroke-width="1.4"/>
-        <text x="470" y="100" text-anchor="middle" fill="#eef2f6" font-family="IBM Plex Mono, monospace" font-size="10">LED / SERIAL</text>
-        <text x="470" y="118" text-anchor="middle" fill="#5eead4" font-family="IBM Plex Mono, monospace" font-size="13">72 BPM</text>
-
-        <text x="20" y="45" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">Blood volume change → analog voltage → digitized beat</text>
-      </svg>
-    </div>
   </div>
 
   <!-- Buzz Blitz -->
@@ -448,35 +401,8 @@
     <p>Built individually for ECE 2035 (Intro to Software/Hardware Design), Buzz Blitz is a real-time, side-scrolling handheld game deployed on an ESP-32-C6 microcontroller with a uLCD display, combining C programming, hardware I/O, and data structures. I implemented player physics, collision detection, and game state logic in C, integrating joystick and button inputs for control. I also designed and debugged a hash-table-based map system to efficiently track dynamic game objects across a scrolling environment — layered on top of core gameplay mechanics including gravity, a "stinger beam" attack with splash damage, and a replay and leaderboard system.</p>
     <p>This was my first real experience with the full embedded development loop: writing C close to the hardware, managing limited memory and processing budget on a microcontroller, and debugging behavior that only showed up on-device. It directly informs how I approach the sensor- and power-constrained systems I now work with in VIP research.</p>
 
-    <div class="project-visual">
-      <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a handheld game device with a screen showing a side-scrolling game character, and a small system diagram showing the ESP32 microcontroller connected to input buttons and a display.">
-        <!-- device -->
-        <rect x="40" y="30" width="140" height="130" rx="14" fill="none" stroke="#eef2f6" stroke-width="1.6"/>
-        <rect x="58" y="46" width="104" height="70" rx="4" fill="#0d2847" stroke="#5eead4" stroke-width="1.2"/>
-        <!-- character -->
-        <rect x="75" y="90" width="10" height="14" fill="#ffb454"/>
-        <circle cx="80" cy="82" r="6" fill="#ffb454"/>
-        <line x1="60" y1="106" x2="150" y2="106" stroke="#5eead4" stroke-width="1"/>
-        <rect x="115" y="94" width="8" height="12" fill="#5eead4" opacity="0.7"/>
-        <rect x="132" y="88" width="8" height="18" fill="#5eead4" opacity="0.5"/>
-        <!-- buttons -->
-        <circle cx="75" cy="138" r="7" fill="none" stroke="#a9bcd0" stroke-width="1.2"/>
-        <circle cx="145" cy="138" r="7" fill="none" stroke="#a9bcd0" stroke-width="1.2"/>
-        <text x="110" y="20" text-anchor="middle" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9.5">HANDHELD DEVICE</text>
-
-        <!-- system diagram -->
-        <rect x="260" y="70" width="90" height="46" rx="4" fill="none" stroke="#ffb454" stroke-width="1.4"/>
-        <text x="305" y="98" text-anchor="middle" fill="#ffb454" font-family="IBM Plex Mono, monospace" font-size="10.5">ESP32</text>
-        <line x1="220" y1="80" x2="260" y2="80" stroke="#5eead4" stroke-width="1.3"/>
-        <text x="216" y="76" text-anchor="end" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9">Buttons</text>
-        <line x1="220" y1="106" x2="260" y2="106" stroke="#5eead4" stroke-width="1.3"/>
-        <text x="216" y="112" text-anchor="end" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9">Battery</text>
-        <line x1="350" y1="93" x2="400" y2="93" stroke="#5eead4" stroke-width="1.3"/>
-        <text x="405" y="80" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9">Display</text>
-        <text x="405" y="97" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9">(game loop,</text>
-        <text x="405" y="114" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9">collision,</text>
-        <text x="405" y="131" fill="#a9bcd0" font-family="IBM Plex Mono, monospace" font-size="9">replay data)</text>
-      </svg>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/BMiV0BKfFhI" title="Buzz Blitz demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
 </section>
@@ -569,7 +495,6 @@
         <li>Projects: Arduino Heart Rate Monitor, embedded ESP-32-C6 game (Buzz Blitz)</li>
         <li>Science Olympiad — State Event Supervisor</li>
       </ul>
-      <span class="placeholder-note">Replace resume.pdf with your actual file</span>
     </div>
     <a href="resume.pdf" class="btn btn-primary" download>⭳ Download PDF</a>
   </div>
